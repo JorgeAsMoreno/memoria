@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { cardsImages } from './data'
 import Card from './components/Card/Card'
-import './App.css'
 
 interface ICards {
   frontFace: string
@@ -16,7 +15,7 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
+    <div>
       {
         cards.map(({ name, frontFace }, index) => (
           <Card {...{name, frontFace}} number={index} />

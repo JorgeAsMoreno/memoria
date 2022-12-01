@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import ReactCardFlip from 'react-card-flip'
 import backFace from '../../images/cover.png'
 
 interface ICard {
@@ -12,8 +13,10 @@ const Card: React.FC<ICard> = ({ name, number, frontFace }) => {
 
   return (
     <div>
-      <img src={backFace} alt={`${name}-back-face`} />
-      <img src={frontFace} alt={`${name}-front-face`} />
+      <ReactCardFlip {...{isFlipped}}>
+        <img src={backFace} alt={`${name}-back-face`} onClick={() => setIsFlipped(prev => !prev)} />
+        <img src={frontFace} alt={`${name}-front-face`} onClick={() => setIsFlipped(prev => !prev)} />
+      </ReactCardFlip>
     </div>
   )
 }
