@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ReactCardFlip from 'react-card-flip'
-import backFace from '../../images/cover.png'
+import backFace from '../../assets/images/cover.png'
 
 interface ICard {
   frontFace: string

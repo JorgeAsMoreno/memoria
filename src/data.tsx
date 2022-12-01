@@ -1,11 +1,11 @@
-import moose from './images/001.png'
-import bear from './images/001.png'
-import ferret from './images/003.png'
-import wolf from './images/004.png'
-import canary from './images/005.png'
-import seal from './images/006.png'
-import bird from './images/007.png'
-import whale from './images/008.png'
+import moose from './assets/images/001.png'
+import bear from './assets/images/002.png'
+import ferret from './assets/images/003.png'
+import wolf from './assets/images/004.png'
+import canary from './assets/images/005.png'
+import seal from './assets/images/006.png'
+import bird from './assets/images/007.png'
+import whale from './assets/images/008.png'
 
 export const cardsImages = [
   {
