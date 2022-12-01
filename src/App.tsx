@@ -34,15 +34,77 @@ const ToggleThemeButton = styled.button`
 `
 
 function App() {
+  const [theme, setTheme] = useState<string>('light')
   const [cards, setCards] = useState<ICards[]>([])
-  const [theme, setTheme] = useState<string>('light');
+  const [firstCard, setFirstCard] = useState<{
+    name: string;
+    number: number;
+  }>({
+    name: '',
+    number: 0,
+  });
+
+  const [secondCard, setSecondCard ] = useState<{
+    name: string;
+    number: number;
+  }>({
+    name: '',
+    number: 0,
+  });
+  const [disabledCards, setDisabledCards] = useState<Array<number>>([])
+  const [unFlipCard, setUnflipCard] = useState<Array<number>>([])
 
   useEffect(() => {
-    setCards(cardsImages)
+    setCards(cardsImages.sort(() => { return Math.random() - 0.5 }))
   }, [])
+
+  useEffect(() => {
+    validateSameCard()
+  }, [secondCard])
 
   const handleSwitchTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light')
+  }
+
+  const flipCard = (number: number, name: string) => {
+    if(firstCard.number === number && firstCard.name === name) {
+      return 0
+    }
+    if (!firstCard.name) {
+      setFirstCard({ name, number})
+    } else if (!secondCard.name) {
+      setSecondCard({ name, number })
+    }
+    return 1
+  }
+  
+  const validateSameCard = () => {
+    if (firstCard.name && secondCard.name) {
+      const match = firstCard.name === secondCard.name
+      match ? disableCards() : unFlipCards()
+    }
+  }
+
+  const disableCards = () => {
+    setDisabledCards([firstCard.number, secondCard.number])
+    resetCards()
+
+  }
+
+  const unFlipCards = () => {
+    setUnflipCard([firstCard.number, secondCard.number])
+    resetCards()
+  }
+
+  const resetCards = () => {
+    setFirstCard({
+      name: '',
+      number: 0,
+    })
+    setSecondCard({
+      name: '',
+      number: 0,
+    })
   }
 
   return (
@@ -56,7 +118,7 @@ function App() {
       </ToggleThemeButton>
         {
           cards.map(({ name, frontFace }, index) => (
-            <Card {...{name, frontFace}} number={index} />
+            <Card {...{name, frontFace, flipCard, unFlipCard, disabledCards}} number={index} />
           ))
         }
     </AppContainer>
