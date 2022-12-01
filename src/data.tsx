@@ -9,67 +9,67 @@ import whale from './images/008.png'
 
 export const cardsImages = [
   {
-    src: moose,
-    animal: "moose"
+    frontFace: moose,
+    name: "moose"
   },
   {
-    src: moose,
-    animal: "moose"
+    frontFace: moose,
+    name: "moose"
   },
   {
-    src: bear,
-    animal: "bear"
+    frontFace: bear,
+    name: "bear"
   },
   {
-    src: bear,
-    animal: "bear"
+    frontFace: bear,
+    name: "bear"
   },
   {
-    src: ferret,
-    animal: "ferret"
+    frontFace: ferret,
+    name: "ferret"
   },
   {
-    src: ferret,
-    animal: "ferret"
+    frontFace: ferret,
+    name: "ferret"
   },
   {
-    src: wolf,
-    animal: "wolf"
+    frontFace: wolf,
+    name: "wolf"
   },
   {
-    src: wolf,
-    animal: "wolf"
+    frontFace: wolf,
+    name: "wolf"
   },
   {
-    src: canary,
-    animal: "canary"
+    frontFace: canary,
+    name: "canary"
   },
   {
-    src: canary,
-    animal: "canary"
+    frontFace: canary,
+    name: "canary"
   },
   {
-    src: seal,
-    animal: "seal"
+    frontFace: seal,
+    name: "seal"
   },
   {
-    src: seal,
-    animal: "seal"
+    frontFace: seal,
+    name: "seal"
   },
   {
-    src: bird,
-    animal: "bird"
+    frontFace: bird,
+    name: "bird"
   },
   {
-    src: bird,
-    animal: "bird"
+    frontFace: bird,
+    name: "bird"
   },
   {
-    src: whale,
-    animal: "whale"
+    frontFace: whale,
+    name: "whale"
   },
   {
-    src: whale,
-    animal: "whale"
+    frontFace: whale,
+    name: "whale"
   },
 ]

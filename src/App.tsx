@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { cardsImages } from './data';
-import Card from './components/Card/Card';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import { cardsImages } from './data'
+import Card from './components/Card/Card'
+import './App.css'
 
 interface ICards {
-  src: string
-  animal: string
+  frontFace: string
+  name: string
 }
 
 function App() {
@@ -18,8 +18,8 @@ function App() {
   return (
     <div className="App">
       {
-        cards.map((card) => (
-          <Card />
+        cards.map(({ name, frontFace }, index) => (
+          <Card {...{name, frontFace}} number={index} />
         ))
       }
     </div>

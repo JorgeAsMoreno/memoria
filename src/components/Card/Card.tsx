@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react'
+import backFace from '../../images/cover.png'
 
-const Card = () => {
+interface ICard {
+  frontFace: string
+  name: string
+  number: number
+}
+
+const Card: React.FC<ICard> = ({ name, number, frontFace }) => {
+  const [isFlipped, setIsFlipped] = useState<boolean>(false)
+
   return (
     <div>
-      <h1>Soy un componente card</h1>
+      <img src={backFace} alt={`${name}-back-face`} />
+      <img src={frontFace} alt={`${name}-front-face`} />
     </div>
   )
 }
