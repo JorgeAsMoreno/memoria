@@ -19,6 +19,7 @@ const AppContainer = styled.div`
   display: flex;
   background: var(--background);
   flex-direction: column;
+  overflow: hidden;
 
   @media screen and ${devices.desktop} {
     flex-direction: row;
@@ -73,18 +74,17 @@ const ToggleThemeButton = styled.button`
 const CardsContainer = styled.div`
   box-shadow: 0px 0px 15px 0px rgba(181,181,181,.8);
   border-radius: 2.5em;
-  overflow: hidden;
-
-  &.disabled-board {
-    margin-top: 120%;
-  }
-
-  &.active-board {
-    animation: ${showBoard} 2s ease;
-  }
-
+  
   @media screen and ${devices.desktop} {
     width: 1000px;
+    
+    &.disabled-board {
+      margin-top: 120%;
+    }
+  
+    &.active-board {
+      animation: ${showBoard} 2s ease;
+    }
   }
 `
 
