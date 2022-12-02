@@ -1,8 +1,13 @@
+@font-face {
+  font-family: Adineue;
+  src: url(adineue-PRO-Bold.ttf) format("truetype");
+}
+
+
 body {
+  background: var(--background);
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: Adineue, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -18,6 +23,6 @@ code {
 }
 
 [data-theme='dark'] {
-  --background: #0f0f19;
+  --background: #000;
   --color: #fff;
 }
