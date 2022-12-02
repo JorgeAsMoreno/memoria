@@ -1,44 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { cardsImages } from './data'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import Card from './components/Card/Card'
 import moon from './assets/icons/moon.svg'
 import sun from './assets/icons/sun.svg'
 import devices from './utils/devices'
+import { gradient, gradientButton, showBoard } from './animations/animations.styles'
 
 interface ICards {
   id: number
   frontFace: string
   name: string
 }
-
-const gradient = keyframes`
-  0% {
-    color: #cf59e6;
-  }
-
-  50% {
-    color: #6bc5f8;
-  }
-
-  100% {
-    color: #cf59e6;
-  }
-`;
-
-const gradientButton = keyframes`
-  0% {
-    background: #cf59e6;
-  }
-
-  50% {
-    background: #6bc5f8;
-  }
-
-  100% {
-    background: #cf59e6;
-  }
-`;
 
 const AppContainer = styled.div`
   align-items: center;
@@ -49,12 +22,14 @@ const AppContainer = styled.div`
 
   @media screen and ${devices.desktop} {
     flex-direction: row;
+    height: 100vh;
   }
 `
 
 const Headings = styled.div`
   p {
-    width: 20em;
+    color: var(--color);
+    width: 20em;    
   }
 
   button {
@@ -66,6 +41,8 @@ const Headings = styled.div`
     padding: 1em 4em;
     border: 0;
   }
+
+
 `
 
 const Title = styled.h1`
@@ -94,8 +71,17 @@ const ToggleThemeButton = styled.button`
 `
 
 const CardsContainer = styled.div`
-  box-shadow: 0px 0px 15px 0px rgba(181,181,181,.2);
+  box-shadow: 0px 0px 15px 0px rgba(181,181,181,.8);
   border-radius: 2.5em;
+  overflow: hidden;
+
+  &.disabled-board {
+    margin-top: 120%;
+  }
+
+  &.active-board {
+    animation: ${showBoard} 2s ease;
+  }
 
   @media screen and ${devices.desktop} {
     width: 1000px;
@@ -107,6 +93,7 @@ function App() {
   const [unFlipCard, setUnflipCard] = useState<Array<number>>([])
   const [theme, setTheme] = useState<string>('light')
   const [cards, setCards] = useState<ICards[]>([])
+  const [isDisabledBoard, setisDisabledBoard] = useState<boolean>(true)
   const [firstCard, setFirstCard] = useState<{
     name: string;
     number: number;
@@ -122,7 +109,6 @@ function App() {
     name: '',
     number: 0,
   });
-
 
   useEffect(() => {
     setCards(cardsImages.sort(() => { return Math.random() - 0.5 }))
@@ -150,9 +136,8 @@ function App() {
   
   const validateSameCard = () => {
     if (firstCard.name && secondCard.name) {
-      const match = firstCard.name === secondCard.name
-      match ? disableCards() : unFlipCards()
-    }
+      firstCard.name === secondCard.name ? disableCards() : unFlipCards()
+    }    
   }
 
   const disableCards = () => {
@@ -185,19 +170,23 @@ function App() {
           src={theme === 'light' ? moon : sun}
         />
       </ToggleThemeButton>
-      <Headings>
+      <Headings className={isDisabledBoard ? 'disabled-board' : 'active-board'}>
         <Title>Juego de <span>Memoria</span></Title>
         <p>
         El jugador escoge dos cartas, si son iguales, se quedarán boca arriba; si las dos
         cartas que escogió son diferentes, las cartas se colocan boca abajo en el mismo
         lugar.
         </p>
-        <button>Iniciar juego!</button>
+        {
+          isDisabledBoard ?
+          <button onClick={() => setisDisabledBoard(false)}>Iniciar juego!</button> :
+          <button onClick={() => setCards(cardsImages.sort(() => { return Math.random() - 0.5 }))}>Reiniciar juego</button>
+        }
       </Headings>
-      <CardsContainer>
+      <CardsContainer className={isDisabledBoard ? 'disabled-board' : 'active-board'}>
         {
           cards.map(({ name, frontFace, id}) => (
-            <Card {...{name, frontFace, flipCard, unFlipCard, disabledCards}} number={id} key={id} />
+            <Card {...{name, frontFace, flipCard, unFlipCard, disabledCards }} number={id} key={id} />
           ))
         }
       </CardsContainer>

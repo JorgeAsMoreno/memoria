@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import ReactCardFlip from 'react-card-flip'
-import styled from 'styled-components'
 import backFace from '../../assets/images/cover.png'
+import ReactCardFlip from 'react-card-flip'
 import devices from '../../utils/devices'
+import styled from 'styled-components'
 
 interface ICard {
   name: string
@@ -34,6 +34,7 @@ export const CardContainer = styled.div`
 
 const Card: React.FC<ICard> = ({ name, number, frontFace, flipCard, unFlipCard, disabledCards }) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false)
+  const [hasClickEvent, setHasClickEvent] = useState<boolean>(true)
 
   useEffect(() => {
     if (unFlipCard.includes(number)) {
@@ -43,7 +44,13 @@ const Card: React.FC<ICard> = ({ name, number, frontFace, flipCard, unFlipCard, 
     }
   }, [unFlipCard])
 
-  const handleClickCard = () => {
+  useEffect(() => {
+    if (disabledCards.includes(number)) {
+      setHasClickEvent(false)
+    }
+  }, [disabledCards])
+
+  const handleClickCard = (): void => {
     const value = flipCard(number, name)
     if (value !== 0) {
       setIsFlipped(!isFlipped)
@@ -52,11 +59,10 @@ const Card: React.FC<ICard> = ({ name, number, frontFace, flipCard, unFlipCard, 
 
   return (
     <CardContainer>
-
-    <ReactCardFlip {...{isFlipped}}>
-      <Image src={backFace} alt={`${name}-back-face`} onClick={handleClickCard} />
-      <Image src={frontFace} alt={`${name}-front-face`} onClick={handleClickCard} />
-    </ReactCardFlip>
+      <ReactCardFlip {...{isFlipped}}>
+        <Image src={backFace} alt={`${name}-back-face`} onClick={hasClickEvent ? handleClickCard : undefined} />
+        <Image src={frontFace} alt={`${name}-front-face`} onClick={hasClickEvent ? handleClickCard : undefined} />
+      </ReactCardFlip>
     </CardContainer>
   )
 }
